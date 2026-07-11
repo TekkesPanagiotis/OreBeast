@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8934b042716c3154ba443739f55b2e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LootPickup
-  popForce: 30
+  popForce: 9
   flyForce: 60
   delayMagnetize: 1.5
   oreData: {fileID: 11400000, guid: 2cd598c327c8cc84c9113cea1d53fa49, type: 2}

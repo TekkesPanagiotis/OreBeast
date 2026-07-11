@@ -1,5 +1,3 @@
-using NUnit.Framework.Interfaces;
-using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,6 +12,7 @@ public class LootPickup : MonoBehaviour
     private bool isMagnetize = false;
     private Transform playerTarget;
     public OreDataSO oreData;
+    private int amount = 1;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -44,8 +43,9 @@ public class LootPickup : MonoBehaviour
     }
     private void CollectLoot()
     {
-        Destroy(gameObject);
         Debug.Log($"Collected {oreData.oreName}!");
         //ADD LOOT TO INVETORY
+        PlayerInventory.Instance.AddItem(oreData, amount);
+        Destroy(gameObject);
     }
 }

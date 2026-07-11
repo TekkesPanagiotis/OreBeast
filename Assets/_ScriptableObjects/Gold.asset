@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: Assembly-CSharp::OreDataSO
   oreName: Gold
-  oreSprite: {fileID: 0}
+  oreSprite: {fileID: 1738379345, guid: f1d4ddcffb1cf1b479d057802ee75a76, type: 3}

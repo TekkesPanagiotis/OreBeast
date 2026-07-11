@@ -6,14 +6,25 @@ public class GameInputs : MonoBehaviour
     private PlayerInputActions playerInputActions;
     public event Action OnFireStarted;
     public event Action OnFireCanceled;
+    //Inventory EVENTS
+    public event Action OnInventoryToggle;
+    //UPGRADE EVENTS
+    public event Action OnUpgradeMenuToggle;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         Instance = this;
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
+        //LASER GUN EVENTS
         playerInputActions.Player.Fire.started += Firestarted;
         playerInputActions.Player.Fire.canceled += Firecanceled;
+
+        //INVENTORY EVENTS
+        playerInputActions.Player.Inventory.performed += ToggleInventory;
+
+        //UPGRADE EVENTS
+        playerInputActions.Player.Upgrade.performed += ToggleUpgradeMenu;
     }
 
     // Update is called once per frame
@@ -35,13 +46,25 @@ public class GameInputs : MonoBehaviour
     }
     private void Firecanceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnFireCanceled?.Invoke(); // Shout that Fire was released
+        OnFireCanceled?.Invoke();
+    }
+
+    private void ToggleInventory(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInventoryToggle?.Invoke();
+    }
+
+    private void ToggleUpgradeMenu(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnUpgradeMenuToggle?.Invoke();
     }
 
     private void OnDestroy()
     {
         playerInputActions.Player.Fire.started -= Firestarted;
         playerInputActions.Player.Fire.canceled -= Firecanceled;
+        playerInputActions.Player.Inventory.performed -= ToggleInventory;
+        playerInputActions.Player.Upgrade.performed -= ToggleUpgradeMenu;
         playerInputActions.Dispose();
     }
 

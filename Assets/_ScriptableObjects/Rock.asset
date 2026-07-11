@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Rock
   m_EditorClassIdentifier: Assembly-CSharp::OreDataSO
   oreName: Rock
-  oreSprite: {fileID: 0}
+  oreSprite: {fileID: -1035880264, guid: 75762288c6ab4e040afe60509721ec0f, type: 3}

@@ -6,7 +6,6 @@ public class LaserController : MonoBehaviour
 {
     public event Action OnTriggerHold;
     public event Action OnTriggerReleased;
-   [SerializeField] private GameInputs gameInputs;
 
     private void Start()
     {

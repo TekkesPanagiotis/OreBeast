@@ -42,7 +42,16 @@ public class LaserEmitter : MonoBehaviour
     void Update()
     {
         if (!isEmitting) return;
-        FireRaycast();
+         FireRaycast();
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            StartLaser();
+        }
+        else
+        {
+            StopLaser();
+        }
+
     }
 
     private void FireRaycast()

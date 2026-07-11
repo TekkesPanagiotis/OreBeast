@@ -56,7 +56,7 @@ public class Damageable : MonoBehaviour
         Vector3 shrinkScale = originalScale * minimumSize;
         transform.localScale =Vector3.Lerp(shrinkScale, originalScale, healthPercent);
         //MAKE THE ORE SHAKE
-        lastDamageTime = Time.time
+        lastDamageTime = Time.time;
         transform.position = originalPosition + UnityEngine.Random.insideUnitSphere * jitterIntensity;
 
 
