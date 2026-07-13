@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e827dedf7bf3948439cd1a81f235011f, type: 3}
-  m_Name: DamageUpgrade
-  m_EditorClassIdentifier: Assembly-CSharp::DamageUpgradeSO
-  upgradeName: Damage
+  m_Script: {fileID: 11500000, guid: 9f50d090d6b0d0c499928d01d29909e9, type: 3}
+  m_Name: SpeedUpgrade
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedUpgradeSO
+  upgradeName: MoveSpeed
   costs:
   - ore: {fileID: 11400000, guid: 2cd598c327c8cc84c9113cea1d53fa49, type: 2}
-    amount: 10
-  currentLevel: 3
+    amount: 5
+  - ore: {fileID: 11400000, guid: baee087de36085e46aa4c14604292181, type: 2}
+    amount: 5
+  currentLevel: 2
   costMultiplierPerLevel: 1.5
-  damageIncreased: 10
+  moveSpeedIncrease: 4

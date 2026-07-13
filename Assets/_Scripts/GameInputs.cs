@@ -10,6 +10,8 @@ public class GameInputs : MonoBehaviour
     public event Action OnInventoryToggle;
     //UPGRADE EVENTS
     public event Action OnUpgradeMenuToggle;
+    //INTERACT EVENTS
+    public event Action OnInteract;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -25,6 +27,9 @@ public class GameInputs : MonoBehaviour
 
         //UPGRADE EVENTS
         playerInputActions.Player.Upgrade.performed += ToggleUpgradeMenu;
+
+        //INTERACT EVENTS
+        playerInputActions.Player.Interact.performed += TryInteract;
     }
 
     // Update is called once per frame
@@ -59,12 +64,18 @@ public class GameInputs : MonoBehaviour
         OnUpgradeMenuToggle?.Invoke();
     }
 
+    private void TryInteract(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteract?.Invoke();
+    }
+
     private void OnDestroy()
     {
         playerInputActions.Player.Fire.started -= Firestarted;
         playerInputActions.Player.Fire.canceled -= Firecanceled;
         playerInputActions.Player.Inventory.performed -= ToggleInventory;
         playerInputActions.Player.Upgrade.performed -= ToggleUpgradeMenu;
+        playerInputActions.Player.Interact.performed -= TryInteract;
         playerInputActions.Dispose();
     }
 

@@ -6,21 +6,30 @@ public class CostSlotUI : MonoBehaviour
 {
     [SerializeField] private Image oreIcon;
     [SerializeField] private TextMeshProUGUI costText;
+    private ResourceCost baseCost;
+    private UpgradeDataSO parentUpgrade;
 
     private ResourceCost requiredCost;
 
-    public void Setup(ResourceCost cost)
+    public void Setup(ResourceCost cost, UpgradeDataSO upgradeData)
     {
-        requiredCost = cost;
+        baseCost = cost;
+        parentUpgrade = upgradeData;
         oreIcon.sprite = cost.ore.oreSprite;
-        costText.text = cost.amount.ToString();
-        RefreshColor();
+        RefreshUI();
     }
 
-    
-    public void RefreshColor()
+
+    public void RefreshUI()
     {
-        if (PlayerInventory.Instance.HasEnoughOres(requiredCost.ore, requiredCost.amount))
+        
+        int actualCost = parentUpgrade.GetCurrentCost(baseCost.amount);
+
+        
+        costText.text = actualCost.ToString();
+
+        
+        if (PlayerInventory.Instance.HasEnoughOres(baseCost.ore, actualCost))
         {
             costText.color = Color.green;
         }

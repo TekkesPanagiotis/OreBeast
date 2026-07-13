@@ -19,7 +19,7 @@ public class UpgradeMenuToggle : MonoBehaviour
         if (isNowOpen)
         {
             Cursor.lockState = CursorLockMode.None; 
-            Cursor.visible = true; 
+            Cursor.visible = true;
         }
         else
         {

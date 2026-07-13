@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed;
     [SerializeField] private GameInputs gameInputs;
     [SerializeField] private Transform cameraTransform;
     private bool isRunning;
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //ATTEMPT ONLY Z MOVEMENT
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
-                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PlayerHeight, playerRadius, moveDirX, moveSpeed * Time.deltaTime);
+                canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PlayerHeight, playerRadius, moveDirZ, moveSpeed * Time.deltaTime);
                 if (canMove)
                 {
                     //CAN MOVE ON THE Z

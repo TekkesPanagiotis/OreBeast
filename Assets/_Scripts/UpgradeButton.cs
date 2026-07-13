@@ -6,7 +6,9 @@ using TMPro;
 public class UpgradeButton : MonoBehaviour
 {
     [Header("Upgrade Data")]
-    [SerializeField] private UpgradeDataSO upgradeData;
+    private UpgradeDataSO upgradeData;
+    private GameObject player;
+    private GameObject gun;
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI upgradeNameText;
@@ -16,29 +18,34 @@ public class UpgradeButton : MonoBehaviour
 
     private List<CostSlotUI> spawnedCosts = new List<CostSlotUI>();
 
-    private void Start()
+    public void Initialize(UpgradeDataSO data, GameObject playerRef, GameObject gunRef)
     {
+        upgradeData = data;
+        player = playerRef; 
+        gun = gunRef;
         upgradeNameText.text = upgradeData.upgradeName;
+
+
+        buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(TryBuyUpgrade);
 
-        
+
         foreach (var cost in upgradeData.costs)
         {
             GameObject newCostObj = Instantiate(costSlotPrefab, costContainer, false);
             CostSlotUI costScript = newCostObj.GetComponent<CostSlotUI>();
-            costScript.Setup(cost);
+            costScript.Setup(cost,upgradeData);
             spawnedCosts.Add(costScript);
         }
+        RefreshAllUI();
     }
 
     private void OnEnable()
-    {
-       
-        RefreshAllColors();
+    {  
+      if (PlayerInventory.Instance != null)
+          PlayerInventory.Instance.OnInventoryUpdate += OnInventoryChanged;
 
-       
-        if (PlayerInventory.Instance != null)
-            PlayerInventory.Instance.OnInventoryUpdate += OnInventoryChanged;
+        RefreshAllUI();
     }
 
     private void OnDisable()
@@ -50,14 +57,14 @@ public class UpgradeButton : MonoBehaviour
     
     private void OnInventoryChanged(OreDataSO ore, int amount)
     {
-        RefreshAllColors();
+        RefreshAllUI();
     }
 
-    private void RefreshAllColors()
+    private void RefreshAllUI()
     {
         foreach (var costSlot in spawnedCosts)
         {
-            costSlot.RefreshColor();
+            costSlot.RefreshUI();
         }
     }
 
@@ -66,7 +73,8 @@ public class UpgradeButton : MonoBehaviour
         
         foreach (var cost in upgradeData.costs)
         {
-            if (!PlayerInventory.Instance.HasEnoughOres(cost.ore, cost.amount))
+            int actualCost = upgradeData.GetCurrentCost(cost.amount);
+            if (!PlayerInventory.Instance.HasEnoughOres(cost.ore, actualCost))
             {
                 Debug.Log($"Not enough {cost.ore.oreName}!");
                 return;
@@ -76,10 +84,19 @@ public class UpgradeButton : MonoBehaviour
         
         foreach (var cost in upgradeData.costs)
         {
-            PlayerInventory.Instance.RemoveOres(cost.ore, cost.amount);
+            int actualCost = upgradeData.GetCurrentCost(cost.amount);
+            PlayerInventory.Instance.RemoveOres(cost.ore, actualCost);
         }
 
         Debug.Log($"Bought {upgradeData.upgradeName}!");
-        // Apply your upgrade logic here!
+        upgradeData.ApplyUpgrade(player, gun);
+        upgradeData.currentLevel++;
+
+       
+        upgradeNameText.text = $"{upgradeData.upgradeName} Lvl {upgradeData.currentLevel}";
+
+       
+        RefreshAllUI();
+
     }
 }
