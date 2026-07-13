@@ -81,6 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1fb47a4e70f027941a7125990ead9207, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9175693675643165729}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1fb47a4e70f027941a7125990ead9207, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4880028264624071508}
   m_SourcePrefab: {fileID: 100100000, guid: 1fb47a4e70f027941a7125990ead9207, type: 3}
 --- !u!1 &401858124190861837 stripped
 GameObject:
@@ -139,3 +142,16 @@ MonoBehaviour:
   lootPrefab: {fileID: 401858124190861837, guid: 2543727cb7eb88a4f87fa29629fe9043, type: 3}
   minLoot: 2
   maxLoot: 20
+--- !u!114 &4880028264624071508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401858124190861837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16af2fdee13b5da43a0189382f2163d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OresAudio
+  oreBreakSound: {fileID: 8300000, guid: d4327c1324ae71f4b812eb5e333713fc, type: 3}

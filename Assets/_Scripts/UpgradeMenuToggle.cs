@@ -20,9 +20,13 @@ public class UpgradeMenuToggle : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None; 
             Cursor.visible = true;
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
         }
         else
         {
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
             Cursor.lockState = CursorLockMode.Locked; 
             Cursor.visible = false; 
         }

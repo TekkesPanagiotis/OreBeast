@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,6 +14,7 @@ public class LootPickup : MonoBehaviour
     private Transform playerTarget;
     public OreDataSO oreData;
     private int amount = 1;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();

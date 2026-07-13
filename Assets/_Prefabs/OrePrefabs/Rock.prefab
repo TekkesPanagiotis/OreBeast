@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd41bbb0985021146868b98b0c81b256, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.0427301
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd41bbb0985021146868b98b0c81b256, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd41bbb0985021146868b98b0c81b256, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.037677
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd41bbb0985021146868b98b0c81b256, type: 3}
       propertyPath: m_LocalRotation.w
@@ -81,6 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd41bbb0985021146868b98b0c81b256, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5812308659218617577}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd41bbb0985021146868b98b0c81b256, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6254091993987417248}
   m_SourcePrefab: {fileID: 100100000, guid: cd41bbb0985021146868b98b0c81b256, type: 3}
 --- !u!1 &6084532689760105336 stripped
 GameObject:
@@ -137,5 +140,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceNode
   lootPrefab: {fileID: 6084532689760105336, guid: 9187d7c737b37d94c95d9f25fd1cffba, type: 3}
-  minLoot: 50
-  maxLoot: 100
+  minLoot: 20
+  maxLoot: 40
+--- !u!114 &6254091993987417248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084532689760105336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16af2fdee13b5da43a0189382f2163d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OresAudio
+  oreBreakSound: {fileID: 8300000, guid: d4327c1324ae71f4b812eb5e333713fc, type: 3}

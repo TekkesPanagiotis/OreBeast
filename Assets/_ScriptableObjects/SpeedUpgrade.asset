@@ -18,6 +18,6 @@ MonoBehaviour:
     amount: 5
   - ore: {fileID: 11400000, guid: baee087de36085e46aa4c14604292181, type: 2}
     amount: 5
-  currentLevel: 2
-  costMultiplierPerLevel: 1.5
-  moveSpeedIncrease: 4
+  currentLevel: 0
+  costMultiplierPerLevel: 3
+  moveSpeedIncrease: 2

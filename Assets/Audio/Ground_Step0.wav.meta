@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c8899e8ddc3f2e46a900ccaeb4d44ca
+guid: eec53751c4e79a7469fc34e774360128
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -22,8 +22,8 @@ AudioImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 214929
-  packageName: Free Laser Weapons
+  productId: 173668
+  packageName: Classic Footstep SFX
   packageVersion: 1.0
-  assetPath: Assets/Laser Weapons Sound Pack/Free/continuous_beam_5.wav
-  uploadId: 484299
+  assetPath: Assets/Classic Footstep SFX/Ground/Ground_Step0.wav
+  uploadId: 376034

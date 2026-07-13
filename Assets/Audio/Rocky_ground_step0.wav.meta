@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c807b6ba8fb9544d9c02bf47d9ce979
+guid: c87c3a812abe2fc4baa1fe54b4b77172
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -22,8 +22,8 @@ AudioImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 214929
-  packageName: Free Laser Weapons
+  productId: 173668
+  packageName: Classic Footstep SFX
   packageVersion: 1.0
-  assetPath: Assets/Laser Weapons Sound Pack/Free/continuous_beam_3.wav
-  uploadId: 484299
+  assetPath: Assets/Classic Footstep SFX/Rocky_ground/Rocky_ground_step0.wav
+  uploadId: 376034

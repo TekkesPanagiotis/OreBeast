@@ -9,9 +9,13 @@ public class PlayerInventory : MonoBehaviour
     public event Action<OreDataSO, int> OnInventoryUpdate;
 
 
+    [SerializeField] private AudioClip pickupSound;
+    private AudioSource playerAudioSource;
+
     private void Awake()
     {
         Instance = this;
+        playerAudioSource = GetComponent<AudioSource>();
     }
     public void AddItem(OreDataSO ore, int amount)
     {
@@ -26,6 +30,9 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log($"Inventory: You now have {inventory[ore]} {ore.oreName}!");
         //USE EVENT FOR UI
         OnInventoryUpdate?.Invoke(ore, inventory[ore]);
+
+        playerAudioSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        playerAudioSource.PlayOneShot(pickupSound);
     }
 
     //INVENTORY-UPGRADE SYSTEM
