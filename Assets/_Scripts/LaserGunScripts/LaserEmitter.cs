@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(GunStats), typeof(LaserController))]
 public class LaserEmitter : MonoBehaviour
@@ -8,6 +9,8 @@ public class LaserEmitter : MonoBehaviour
     private LaserController controller;
     private Camera mainCam;
     private bool isEmitting = false;
+    [SerializeField] GameObject muzzleParticle;
+    [SerializeField] ParticleSystem laserHitParticle;
     
     void Awake()
     {
@@ -15,6 +18,10 @@ public class LaserEmitter : MonoBehaviour
         controller = GetComponent<LaserController>();
         mainCam = Camera.main;
         laserVisual.enabled = false;
+    }
+    private void Start()
+    {
+        laserHitParticle.Stop();
     }
     private void OnEnable()
     {
@@ -31,18 +38,24 @@ public class LaserEmitter : MonoBehaviour
     {
         isEmitting = true;
         laserVisual.enabled = true;
+        muzzleParticle.SetActive(true);
     }
 
     private void StopLaser()
     {
         isEmitting = false;
         laserVisual.enabled = false;
+        muzzleParticle.SetActive(false);
+        if (laserHitParticle.isPlaying)
+        {
+            laserHitParticle.Stop();
+        }
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (!isEmitting) return;
-         FireRaycast();
+
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             StartLaser();
@@ -51,9 +64,14 @@ public class LaserEmitter : MonoBehaviour
         {
             StopLaser();
         }
-
     }
-
+    void LateUpdate()
+    {
+        if (isEmitting)
+        {
+            FireRaycast();
+        }
+    }
     private void FireRaycast()
     {
         laserVisual.SetPosition(0, GunPoint.position);
@@ -61,6 +79,12 @@ public class LaserEmitter : MonoBehaviour
         if (Physics.Raycast(startRay,out RaycastHit hit, stats.laserRange))
         {
             laserVisual.SetPosition(1, hit.point);
+            laserHitParticle.transform.position = hit.point;
+            laserHitParticle.transform.forward = hit.normal;
+            if (!laserHitParticle.isPlaying)
+            { 
+                laserHitParticle.Play();
+            }
             Damageable target = hit.collider.GetComponent<Damageable>();
             if (target != null)
             {
@@ -70,6 +94,10 @@ public class LaserEmitter : MonoBehaviour
         else
         {
             laserVisual.SetPosition(1, GunPoint.position + mainCam.transform.forward * stats.laserRange);
+            if (laserHitParticle.isPlaying)
+            {
+                laserHitParticle.Stop();
+            }
         }
     }
     public bool IsFiring()

@@ -1,8 +1,10 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class ResourceNode : MonoBehaviour
 {
     [SerializeField] private GameObject lootPrefab;
+    [SerializeField] private CinemachineImpulseSource screenShake;
     [SerializeField] private int minLoot = 2;
     [SerializeField] private int maxLoot = 5;
     private Damageable damageable;
@@ -28,6 +30,7 @@ public class ResourceNode : MonoBehaviour
             Vector3 spawnPosition = transform.position + Vector3.up;
             Instantiate(lootPrefab, spawnPosition, Quaternion.identity);
         }
+        screenShake.GenerateImpulse();
         Destroy(gameObject);
     }
 }

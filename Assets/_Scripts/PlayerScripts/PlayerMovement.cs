@@ -6,12 +6,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameInputs gameInputs;
     [SerializeField] private Transform cameraTransform;
     private bool isRunning;
+   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+       
     }
+
 
     // Update is called once per frame
     void Update()
@@ -33,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
         //CHECK IF PLAYER CAN MOVE
         float playerRadius = 0.5f;
         float PlayerHeight = 2f;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PlayerHeight, playerRadius, moveDir,moveSpeed * Time.deltaTime);
+        //HORIZONTAL
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * PlayerHeight, playerRadius, moveDir, moveSpeed * Time.deltaTime);
         if (!canMove)
         {
             //Attempt move on X
@@ -64,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
+        
         isRunning = moveDir != Vector3.zero;
     }
     public bool IsRunning()
