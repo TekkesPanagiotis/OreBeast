@@ -19,5 +19,6 @@ MonoBehaviour:
   - ore: {fileID: 11400000, guid: baee087de36085e46aa4c14604292181, type: 2}
     amount: 5
   currentLevel: 0
+  maxLevel: 5
   costMultiplierPerLevel: 3
   moveSpeedIncrease: 2

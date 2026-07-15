@@ -15,16 +15,34 @@ public class LootPickup : MonoBehaviour
     public OreDataSO oreData;
     private int amount = 1;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-        Vector3 RandomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(1f, 2f), Random.Range(-1f, 1f)).normalized;
+    }
+       private void OnEnable()
+       {
+        
+        isMagnetize = false;
 
-        rb.AddForce(RandomDirection * popForce, ForceMode.Impulse);
+        
+       
+       
+        
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        collider.isTrigger = false;
+
+       
+        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(1f, 2f), Random.Range(-1f, 1f)).normalized;
+        rb.AddForce(randomDirection * popForce, ForceMode.Impulse);
         rb.AddTorque(Random.insideUnitCircle * popForce, ForceMode.Impulse);
+
+      
         StartCoroutine(WaitForMagnetize());
     }
+
     private IEnumerator WaitForMagnetize()
     {
         yield return new WaitForSeconds(delayMagnetize);
@@ -48,6 +66,9 @@ public class LootPickup : MonoBehaviour
         Debug.Log($"Collected {oreData.oreName}!");
         //ADD LOOT TO INVETORY
         PlayerInventory.Instance.AddItem(oreData, amount);
-        Destroy(gameObject);
+        if (gameObject.TryGetComponent(out PooledLootItem lootItem))
+        {
+            LootPool.Instance.ReturnLootToPool(lootItem.MyType, gameObject);
+        }
     }
 }

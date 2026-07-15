@@ -7,6 +7,7 @@ public class ResourceNode : MonoBehaviour
     [SerializeField] private CinemachineImpulseSource screenShake;
     [SerializeField] private int minLoot = 2;
     [SerializeField] private int maxLoot = 5;
+    [SerializeField] private LootType oreType;
     private Damageable damageable;
 
     private void Awake()
@@ -28,7 +29,7 @@ public class ResourceNode : MonoBehaviour
         for (int i = 0; i < amountToSpawn; i++)
         {
             Vector3 spawnPosition = transform.position + Vector3.up;
-            Instantiate(lootPrefab, spawnPosition, Quaternion.identity);
+            LootPool.Instance.DropLootAtLocation(oreType, spawnPosition);
         }
         screenShake.GenerateImpulse();
         Destroy(gameObject);

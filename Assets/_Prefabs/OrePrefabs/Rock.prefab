@@ -140,8 +140,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceNode
   lootPrefab: {fileID: 6084532689760105336, guid: 9187d7c737b37d94c95d9f25fd1cffba, type: 3}
+  screenShake: {fileID: 0}
   minLoot: 20
   maxLoot: 40
+  oreType: 0
 --- !u!114 &6254091993987417248
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class PlayerAnimations : MonoBehaviour
     void Update()
     {
         animator.SetBool("IsRunning", playerMovement.IsRunning());
+        animator.SetBool("IsGrappling", playerMovement.isGrappling);
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             animator.SetBool("Fire", laserEmitter.IsFiring());

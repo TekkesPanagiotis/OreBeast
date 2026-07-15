@@ -14,7 +14,7 @@ public class GameInputs : MonoBehaviour
     public event Action OnInteract;
 
     //JETPACK EVENTS
-    public event Action OnJumpStarted;
+    public event Action OnGrappleStarted;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -34,7 +34,7 @@ public class GameInputs : MonoBehaviour
         //INTERACT EVENTS
         playerInputActions.Player.Interact.performed += TryInteract;
         //JETPACK EVENTS
-        playerInputActions.Player.Fly.started += OnJumpStart;
+        playerInputActions.Player.Fly.started += OnGrappleStart;
     }
 
     // Update is called once per frame
@@ -74,9 +74,9 @@ public class GameInputs : MonoBehaviour
         OnInteract?.Invoke();
     }
 
-    private void OnJumpStart(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void OnGrappleStart(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnJumpStarted?.Invoke();
+        OnGrappleStarted?.Invoke();
     }
 
     private void OnDestroy()
@@ -86,7 +86,7 @@ public class GameInputs : MonoBehaviour
         playerInputActions.Player.Inventory.performed -= ToggleInventory;
         playerInputActions.Player.Upgrade.performed -= ToggleUpgradeMenu;
         playerInputActions.Player.Interact.performed -= TryInteract;
-        playerInputActions.Player.Fly.started -= OnJumpStart;
+        playerInputActions.Player.Fly.started -= OnGrappleStart;
         playerInputActions.Dispose();
     }
 

@@ -140,3 +140,4 @@ MonoBehaviour:
   screenShake: {fileID: 0}
   minLoot: 2
   maxLoot: 5
+  oreType: 2

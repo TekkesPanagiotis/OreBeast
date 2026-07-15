@@ -62,6 +62,18 @@ public class UpgradeButton : MonoBehaviour
 
     private void RefreshAllUI()
     {
+        if (upgradeData.IsMaxLevel())
+        {
+            buyButton.interactable = false; // Grays out the button!
+            upgradeNameText.text = $"{upgradeData.upgradeName} (MAX)";
+             costContainer.gameObject.SetActive(false); 
+        }
+        else
+        {
+            buyButton.interactable = true;
+            upgradeNameText.text = $"{upgradeData.upgradeName} Lvl {upgradeData.currentLevel}";
+            costContainer.gameObject.SetActive(true);
+        }
         foreach (var costSlot in spawnedCosts)
         {
             costSlot.RefreshUI();
@@ -70,7 +82,12 @@ public class UpgradeButton : MonoBehaviour
 
     private void TryBuyUpgrade()
     {
-        
+        if (upgradeData.IsMaxLevel())
+        {
+            Debug.Log("Already at max level!");
+            return;
+        }
+
         foreach (var cost in upgradeData.costs)
         {
             int actualCost = upgradeData.GetCurrentCost(cost.amount);
@@ -92,10 +109,6 @@ public class UpgradeButton : MonoBehaviour
         upgradeData.ApplyUpgrade(player, gun);
         upgradeData.currentLevel++;
 
-       
-        upgradeNameText.text = $"{upgradeData.upgradeName} Lvl {upgradeData.currentLevel}";
-
-       
         RefreshAllUI();
 
     }

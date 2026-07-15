@@ -15,7 +15,8 @@ MonoBehaviour:
   upgradeName: Damage
   costs:
   - ore: {fileID: 11400000, guid: 2cd598c327c8cc84c9113cea1d53fa49, type: 2}
-    amount: 10
-  currentLevel: 3
+    amount: 5
+  currentLevel: 2
+  maxLevel: 20
   costMultiplierPerLevel: 1.5
   damageIncreased: 10

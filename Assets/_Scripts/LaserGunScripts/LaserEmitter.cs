@@ -93,11 +93,8 @@ public class LaserEmitter : MonoBehaviour
         }
         else
         {
-            laserVisual.SetPosition(1, GunPoint.position + mainCam.transform.forward * stats.laserRange);
-            if (laserHitParticle.isPlaying)
-            {
-                laserHitParticle.Stop();
-            }
+            laserVisual.SetPosition(1, startRay.GetPoint(stats.laserRange));
+            
         }
     }
     public bool IsFiring()

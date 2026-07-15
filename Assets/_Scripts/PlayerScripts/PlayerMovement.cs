@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     private bool isRunning;
    
-
+    public bool isGrappling = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleMovement()
     {
+        if (isGrappling) return;
+
+
         Vector2 inputVector = gameInputs.GetMovementVectorNormalized();
         //Get Camera rotation
         Vector3 camForward = cameraTransform.forward;

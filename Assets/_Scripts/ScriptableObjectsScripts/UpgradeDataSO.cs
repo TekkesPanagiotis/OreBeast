@@ -13,6 +13,7 @@ public abstract class UpgradeDataSO : ScriptableObject
     public ResourceCost[] costs;
     //UP THE COST EVERYTIME PLAYER BUYS UPGRADE
     public int currentLevel = 0;
+    public int maxLevel = 10;
     public float costMultiplierPerLevel = 1.5f;
 
 
@@ -29,4 +30,9 @@ public abstract class UpgradeDataSO : ScriptableObject
     }
 
     public abstract void ApplyUpgrade(GameObject player, GameObject gun);
+
+    public bool IsMaxLevel()
+    {
+        return currentLevel >= maxLevel;
+    }
 }
