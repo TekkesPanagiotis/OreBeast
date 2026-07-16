@@ -6,6 +6,7 @@ public class OresAudio : MonoBehaviour
     
     private Damageable damageable;
     [SerializeField] private AudioClip oreBreakSound;
+    [SerializeField] private AudioClip oreSpawnSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -15,6 +16,7 @@ public class OresAudio : MonoBehaviour
     private void OnEnable()
     {
         damageable.OnDeath += damageable_OnDeath;
+        TempAudioPool.Instance.PlaySoundAtLocation(oreSpawnSound, transform.position);
     }
 
     private void OnDisable()

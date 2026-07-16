@@ -61,7 +61,7 @@ public class Damageable : MonoBehaviour
 
 
         if (isDead) return;
-        if (currentHealth < 0) 
+        if (currentHealth <= 0) 
         {
             Die();
         }

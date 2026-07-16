@@ -1,4 +1,6 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GrappleController : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class GrappleController : MonoBehaviour
     [SerializeField] LineRenderer grappleVisual;
     [SerializeField] private Transform gunTip;
     [SerializeField] private GameObject grappleText;
+    [SerializeField] private Image crosshair;
 
     private Vector3 grappleTarget;
 
@@ -37,12 +40,12 @@ public class GrappleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMovement.isGrappling && isGrappleUnlocked) 
+        if (playerMovement.isGrappling && isGrappleUnlocked)
         {
             grappleText.SetActive(false);
             ExecuteGrapple();
         }
-        else if(!playerMovement.isGrappling && isGrappleUnlocked)
+        else if (!playerMovement.isGrappling && isGrappleUnlocked)
         {
             CheckForGrappleTarget();
         }
@@ -60,27 +63,28 @@ public class GrappleController : MonoBehaviour
 
         if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit, grappleRange, grappleLayer))
         {
-
+            crosshair.color = Color.green;
             grappleText.SetActive(true);
-            grappleText.transform.position = hit.transform.position + (Vector3.up * 4f);
+            grappleText.transform.position = hit.transform.position + (Vector3.up * 2f);
         }
         else
         {
-
+            crosshair.color = Color.white;
             grappleText.SetActive(false);
         }
     }
-        void TryGrapple()
-        {
+    void TryGrapple()
+    {
         if (playerMovement.isGrappling && isGrappleUnlocked) return;
 
         if (Time.time < nextGrappleTime && isGrappleUnlocked)
         {
             Debug.Log("Grapple is on cooldown!");
+            crosshair.color = Color.white;
             return;
         }
 
-        if (Physics.Raycast(camTransform.position,camTransform.forward, out RaycastHit hit, grappleRange, grappleLayer) && isGrappleUnlocked)
+        if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit, grappleRange, grappleLayer) && isGrappleUnlocked)
         {
             //GET GRAPPLE POSITION
             grappleTarget = hit.point;
@@ -99,6 +103,7 @@ public class GrappleController : MonoBehaviour
         {
             grappleVisual.SetPosition(0, gunTip.position);
         }
+        crosshair.color = Color.white;
         transform.position = Vector3.MoveTowards(transform.position, grappleTarget, grappleSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, grappleTarget) < 1f)
         {

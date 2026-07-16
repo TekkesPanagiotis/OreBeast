@@ -21,7 +21,7 @@ public class LaserEmitter : MonoBehaviour
     }
     private void Start()
     {
-        laserHitParticle.Stop();
+        //laserHitParticle.Stop();
     }
     private void OnEnable()
     {

@@ -6,6 +6,7 @@ public class Barrier : MonoBehaviour
     [SerializeField] private GameObject barrier;
     [SerializeField] private GameObject barrierUI;
     [SerializeField] private GameObject interactText;
+    [SerializeField] private GameObject islandToSpawn;
 
     private bool isPlayerInRange = false;
     private bool isBarrierOpen = false;
@@ -15,6 +16,7 @@ public class Barrier : MonoBehaviour
     {
         GameInputs.Instance.OnInteract += GameInputs_OnInteract;
         interactText.SetActive(false);
+        islandToSpawn.SetActive(false);
     }
     private void OnDestroy()
     {
@@ -63,5 +65,6 @@ public class Barrier : MonoBehaviour
         barrier.SetActive(false);
         barrierUI.SetActive(false);
         interactText.SetActive(false);
+        islandToSpawn.SetActive(true);
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class ResourceNode : MonoBehaviour
 {
     [SerializeField] private GameObject lootPrefab;
-    [SerializeField] private CinemachineImpulseSource screenShake;
     [SerializeField] private int minLoot = 2;
     [SerializeField] private int maxLoot = 5;
     [SerializeField] private LootType oreType;
@@ -31,7 +30,6 @@ public class ResourceNode : MonoBehaviour
             Vector3 spawnPosition = transform.position + Vector3.up;
             LootPool.Instance.DropLootAtLocation(oreType, spawnPosition);
         }
-        screenShake.GenerateImpulse();
         Destroy(gameObject);
     }
 }
