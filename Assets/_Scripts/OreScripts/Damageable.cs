@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Damageable : MonoBehaviour
@@ -27,6 +28,11 @@ public class Damageable : MonoBehaviour
     [SerializeField] private float jitterIntensity = 0.05f;
     private Vector3 originalPosition;
     private float lastDamageTime;
+
+    [Header("Damage UI settings")]
+    private float accumulatedDamage = 0f;
+    private float lastNumberSpawnTime = 0f;
+    private float numberSpawnInterval = 0.2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,6 +55,16 @@ public class Damageable : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        accumulatedDamage += damage;
+        if (Time.time >= lastNumberSpawnTime + numberSpawnInterval)
+        {
+           
+            DamageNumberPool.Instance.SpawnDamageNumber(accumulatedDamage, transform.position);
+
+            
+            accumulatedDamage = 0f;
+            lastNumberSpawnTime = Time.time;
+        }
         //CHANGE MATERIAL TO HOT
         float healthPercent = currentHealth / maxHealth;
         material.color = Color.Lerp(hotColor, originalColor, healthPercent);

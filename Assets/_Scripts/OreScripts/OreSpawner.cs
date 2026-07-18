@@ -20,6 +20,11 @@ public class OreSpawner : MonoBehaviour
     private GameObject currentSpawnedOre;
     private bool isSpawning = false;
 
+    //AVOID OBSTACLES
+    [SerializeField] private LayerMask obstacleLayer;
+    private float checkRadius = 1f;
+    private int maxSpawnAttempts = 10;
+
     void Update()
     {
         if (currentSpawnedOre == null && !isSpawning)
@@ -32,25 +37,29 @@ public class OreSpawner : MonoBehaviour
     {
         isSpawning = true;
         yield return new WaitForSeconds(spawnDelay);
+        Vector3 spawnPosition = Vector3.zero;
+        bool foundValidPosition = false;
 
-        Vector3 randomOffset = new Vector3(
-            Random.Range(-spawnRadius, spawnRadius),
-            0f,
-            Random.Range(-spawnRadius, spawnRadius)
-        );
-        Vector3 spawnPosition = transform.position + Vector3.up + randomOffset;
-
-        
-        GameObject selectedOre = GetRandomOreByWeight();
-
-        
-        if (selectedOre != null)
+        for (int i = 0; i < maxSpawnAttempts; i++)
         {
-            currentSpawnedOre = Instantiate(selectedOre, spawnPosition, selectedOre.transform.rotation);
+            Vector3 randomOffset = new Vector3(
+                Random.Range(-spawnRadius, spawnRadius),
+                0f,
+                Random.Range(-spawnRadius, spawnRadius)
+            );
+            Vector3 potentialPosition = transform.position + Vector3.up + randomOffset;
+
+            if (!Physics.CheckSphere(potentialPosition, checkRadius, obstacleLayer))
+            {
+                spawnPosition = potentialPosition;
+                foundValidPosition = true;
+                break; //FOUND SPOT SO EXIT
+            }
         }
-        else
+        if (foundValidPosition)
         {
-            Debug.LogWarning("No ore selected! Check your weights in the Inspector.");
+            GameObject selectedOre = GetRandomOreByWeight();
+            currentSpawnedOre = Instantiate(selectedOre, spawnPosition, selectedOre.transform.rotation);
         }
 
         isSpawning = false;
@@ -80,5 +89,21 @@ public class OreSpawner : MonoBehaviour
             }
         }
 
-        return null;     }
+        return null;     
+    }
+    private void OnDrawGizmosSelected()
+    {
+       //GIZMO FOR SPAWN RADIUS
+        Vector3 center = transform.position + Vector3.up;
+
+       
+        Gizmos.color = Color.green;
+        
+        Vector3 areaSize = new Vector3(spawnRadius * 2, 0.1f, spawnRadius * 2);
+        Gizmos.DrawWireCube(center, areaSize);
+
+        //GIZMO FOR CHECK RADIUS
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(center, checkRadius);
+    }
 }
