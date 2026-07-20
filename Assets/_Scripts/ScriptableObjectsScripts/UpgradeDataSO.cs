@@ -29,7 +29,7 @@ public abstract class UpgradeDataSO : ScriptableObject
         return Mathf.RoundToInt(multipliedCost);
     }
 
-    public abstract void ApplyUpgrade(GameObject player, GameObject gun);
+    public abstract void ApplyUpgrade(GameObject player, GameObject gun, GameObject drone);
 
     public bool IsMaxLevel()
     {

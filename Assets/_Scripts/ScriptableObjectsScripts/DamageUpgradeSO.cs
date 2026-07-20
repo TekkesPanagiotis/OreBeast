@@ -6,7 +6,7 @@ public class DamageUpgradeSO : UpgradeDataSO
     private GunStats gunStats;
     [SerializeField] private float damageIncreased = 10;
 
-    public override void ApplyUpgrade(GameObject player, GameObject gun)
+    public override void ApplyUpgrade(GameObject player, GameObject gun, GameObject drone)
     {
         GunStats gunStats = gun.GetComponent<GunStats>();
         gunStats.damagePerSecond += damageIncreased;

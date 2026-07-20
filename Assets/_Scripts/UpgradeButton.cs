@@ -9,6 +9,7 @@ public class UpgradeButton : MonoBehaviour
     private UpgradeDataSO upgradeData;
     private GameObject player;
     private GameObject gun;
+    private GameObject drone;
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI upgradeNameText;
@@ -18,11 +19,12 @@ public class UpgradeButton : MonoBehaviour
 
     private List<CostSlotUI> spawnedCosts = new List<CostSlotUI>();
 
-    public void Initialize(UpgradeDataSO data, GameObject playerRef, GameObject gunRef)
+    public void Initialize(UpgradeDataSO data, GameObject playerRef, GameObject gunRef, GameObject droneRef)
     {
         upgradeData = data;
         player = playerRef; 
         gun = gunRef;
+        drone = droneRef;
         upgradeNameText.text = upgradeData.upgradeName;
 
 
@@ -106,10 +108,17 @@ public class UpgradeButton : MonoBehaviour
         }
 
         Debug.Log($"Bought {upgradeData.upgradeName}!");
-        upgradeData.ApplyUpgrade(player, gun);
         upgradeData.currentLevel++;
-
         RefreshAllUI();
+        try
+        {
+            upgradeData.ApplyUpgrade(player, gun, drone);
+        }
+        catch (System.Exception e)
+        {
+           
+            Debug.LogError($"The upgrade fired, but the spawned object crashed! Error: {e.Message}");
+        }
 
     }
 }

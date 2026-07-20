@@ -18,10 +18,12 @@ public class LaserEmitter : MonoBehaviour
         controller = GetComponent<LaserController>();
         mainCam = Camera.main;
         laserVisual.enabled = false;
+
+     
     }
     private void Start()
     {
-        //laserHitParticle.Stop();
+        laserHitParticle.Stop();
     }
     private void OnEnable()
     {
@@ -94,7 +96,11 @@ public class LaserEmitter : MonoBehaviour
         else
         {
             laserVisual.SetPosition(1, startRay.GetPoint(stats.laserRange));
-            
+            if (laserHitParticle.isPlaying)
+            {
+                laserHitParticle.Stop();
+            }
+
         }
     }
     public bool IsFiring()

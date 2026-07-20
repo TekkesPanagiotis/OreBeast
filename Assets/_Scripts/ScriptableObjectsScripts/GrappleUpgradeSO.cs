@@ -4,7 +4,7 @@ using UnityEngine;
 public class GrappleUpgradeSO : UpgradeDataSO
 {
     private GrappleController grappleController;
-    public override void ApplyUpgrade(GameObject player, GameObject gun)
+    public override void ApplyUpgrade(GameObject player, GameObject gun, GameObject drone)
     {
         GrappleController grappleController = player.GetComponent<GrappleController>();
         grappleController.isGrappleUnlocked = true;

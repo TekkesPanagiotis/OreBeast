@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Drone : MonoBehaviour
@@ -5,7 +6,7 @@ public class Drone : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float hoverHeight;
     [SerializeField] private float detectionRadius;
-    [SerializeField] private float damagePerSecond;
+     public float droneDamagePerSecond;
     [SerializeField] private LayerMask oreLayer;
 
     //VISUAL
@@ -14,13 +15,22 @@ public class Drone : MonoBehaviour
     [SerializeField] private Transform laserShootPoint;
 
     private Damageable currentTarget;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    //SOUND
+    [Header("SOUNDS")]
+    [SerializeField] private AudioClip laserClip;
+    [SerializeField] private float soundInterval = 0.8f;
+    private float soundTimer;
+
+    [Header("ANIMATIONS")]
+    [SerializeField] private Animator animator;
+   
     void Start()
     {
         laserVisual.enabled = false;
     }
 
-    // Update is called once per frame
+    
     void LateUpdate()
     {
         if(currentTarget == null)
@@ -58,8 +68,10 @@ public class Drone : MonoBehaviour
     {
         Vector3 targetHoverPosition = currentTarget.transform.position + (Vector3.up * hoverHeight);
         transform.position = Vector3.MoveTowards(transform.position, targetHoverPosition, moveSpeed * Time.deltaTime);
+        animator.SetBool("IsWalking", true);
         if(Vector3.Distance(transform.position, targetHoverPosition) < 0.2f)
         {
+            animator.SetBool("IsWalking", false);
             StartMining();
         }
         else
@@ -77,11 +89,24 @@ public class Drone : MonoBehaviour
             laserVisual.SetPosition(1, currentTarget.transform.position + (Vector3.up * 0.5f));
         }
 
-        currentTarget.TakeDamage(damagePerSecond * Time.deltaTime);
+        currentTarget.TakeDamage(droneDamagePerSecond * Time.deltaTime);
+        //LASER SOUND 
+        soundTimer -= Time.deltaTime;
+        if (soundTimer <= 0f)
+        {
+            TempAudioPool.Instance.PlaySoundAtLocation(laserClip, transform.position);
+            soundTimer = soundInterval;
+        }
     }
     private void StopMining()
     {
         laserVisual.enabled = false;
+        soundTimer = 0f;
+    }
+
+    public float DroneDamage()
+    {
+        return droneDamagePerSecond;
     }
     private void OnDrawGizmosSelected()
     {

@@ -12,6 +12,7 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] private GameObject playerReference;
     [SerializeField] private GameObject gunReference;
+    [SerializeField] private GameObject droneReference;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class UpgradeManager : MonoBehaviour
 
             
             UpgradeButton buttonScript = newButton.GetComponent<UpgradeButton>();
-            buttonScript.Initialize(upgradeSO,playerReference,gunReference);
+            buttonScript.Initialize(upgradeSO,playerReference,gunReference,droneReference);
         }
     }
 }
