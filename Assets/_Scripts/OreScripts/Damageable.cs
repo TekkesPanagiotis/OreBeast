@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-    [SerializeField] private float maxHealth;
-    [SerializeField] private float currentHealth;//serialize only for debug reasons dont put value
+     public float maxHealth;
+     public float currentHealth;
     private bool isDead = false;
     public event Action OnDeath;
 

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DroneUpgradeSO
   upgradeName: Drone-Miner
   costs:
-  - ore: {fileID: 11400000, guid: 2cd598c327c8cc84c9113cea1d53fa49, type: 2}
-    amount: 5
-  currentLevel: 0
+  - ore: {fileID: 11400000, guid: 985700071c5896f44964940a1225f85a, type: 2}
+    amount: 20
+  currentLevel: 7
   maxLevel: 10
   costMultiplierPerLevel: 1.5
   dronePrefab: {fileID: 4796910754061687840, guid: 6d5266c892c29454e9d412859fdc21c3, type: 3}

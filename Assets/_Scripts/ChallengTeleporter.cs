@@ -7,6 +7,7 @@ public class ChallengTeleporter : MonoBehaviour
     [SerializeField] private Transform targetPosition;
     private BoxCollider collider;
     [SerializeField] private GrappleController grappleController;
+    [SerializeField] private GameObject lights;
     private bool isTeleported = false;
 
     private void Start()
@@ -32,6 +33,7 @@ public class ChallengTeleporter : MonoBehaviour
             if (grappleController.isGrappleUnlocked)
             {
                 other.gameObject.transform.position = targetPosition.position;
+                lights.SetActive(false);
                 isTeleported = true;
             }
         }
